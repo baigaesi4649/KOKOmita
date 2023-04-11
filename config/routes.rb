@@ -18,12 +18,11 @@ Rails.application.routes.draw do
      get 'my_page/information/:id' => "my_page#show"
      patch 'my_page/information' => "my_page#renew"
      delete 'my_page/information/:id' => "my_page#destroy"
-  end
-  
-  namespace :public do
+     
      get "discoveries" => "discoveries#index"
      get 'discoveries/:id' => "discoveries#show"
      post "discoveries" => "discoveries#create"
+
   end
   
   # 管理者用
@@ -35,21 +34,15 @@ Rails.application.routes.draw do
      get "members" => "members#index"
      get 'members/:id/edit' => "members#edit"
      patch "members/:id" => "members#update"
-  end
-  
-  namespace :admin do
+
      get "discoveries" => "discoveries#index"
      get 'discoveries/:id/edit' => "discoveries#edit"
      patch "discoveries/:id" => "discoveries#update"
-  end
-  
-  namespace :admin do
+
      get "reviews" => "reviews#index"
      get 'reviews/:id/edit' => "reviews#edit"
      patch "reviews/:id" => "reviews#update"
-  end
-  
-  namespace :admin do
+
      get "genres" => "genres#index"
      post 'genres/:id/edit' => "genres#create"
      patch "genres/:id" => "genres#update"
