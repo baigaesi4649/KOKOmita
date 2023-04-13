@@ -55,8 +55,6 @@ ActiveRecord::Schema.define(version: 2023_04_05_061646) do
   create_table "discoveries", force: :cascade do |t|
     t.integer "member_id", null: false
     t.integer "genre_id", null: false
-    t.string "image1", null: false
-    t.string "image2", null: false
     t.string "title", null: false
     t.string "explanation", null: false
     t.boolean "is_deleted", default: false, null: false
@@ -71,8 +69,8 @@ ActiveRecord::Schema.define(version: 2023_04_05_061646) do
   end
 
   create_table "members", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "user_name", null: false
+    t.string "name"
+    t.string "user_name"
     t.string "email", null: false
     t.string "encrypted_password", null: false
     t.boolean "is_cancelled", default: false, null: false

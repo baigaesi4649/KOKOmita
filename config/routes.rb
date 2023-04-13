@@ -8,16 +8,19 @@ Rails.application.routes.draw do
   devise_for :members, controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'}
+  devise_scope :member do
+  post 'public/guest_sign_in', to: 'public/sessions#guest_sign_in'
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   
   namespace :public do
-     get "my_page" => "my_page#index"
-     patch "my_page" => "my_page#update"
-     post "my_page" => "my_page#create"
-     patch 'my_page/withdraw' => "my_page#withdraw"
-     get 'my_page/information/:id' => "my_page#show"
-     patch 'my_page/information' => "my_page#renew"
-     delete 'my_page/information/:id' => "my_page#destroy"
+     get "my_pages" => "my_pages#index"
+     patch "my_pages" => "my_pages#update"
+     post "my_pages" => "my_pages#create"
+     patch 'my_pages/withdraw' => "my_pages#withdraw"
+     get 'my_pages/information/:id' => "my_pages#show"
+     patch 'my_pages/information' => "my_pages#renew"
+     delete 'my_pages/information/:id' => "my_pages#destroy"
      
      get "discoveries" => "discoveries#index"
      get 'discoveries/:id' => "discoveries#show"

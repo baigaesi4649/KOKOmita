@@ -4,8 +4,8 @@ class DeviseCreateMembers < ActiveRecord::Migration[6.1]
   def change
     create_table :members do |t|
       ## Database authenticatable
-      t.string :name,null: false
-      t.string :user_name,null: false
+      t.string :name
+      t.string :user_name
       t.string :email,null: false
       t.string :encrypted_password,null: false 
       t.boolean :is_cancelled,null: false, default: false
