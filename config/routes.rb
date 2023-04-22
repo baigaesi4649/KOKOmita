@@ -14,17 +14,15 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   
   namespace :public do
+     get 'my_pages/information/:id', to: "my_pages#show", as: 'my_pages_show'
      get "my_pages" => "my_pages#index"
      patch "my_pages" => "my_pages#update"
      post "my_pages" => "my_pages#create"
      patch 'my_pages/withdraw' => "my_pages#withdraw"
-     get 'my_pages/information/:id' => "my_pages#show"
-     patch 'my_pages/information' => "my_pages#renew"
-     delete 'my_pages/information/:id' => "my_pages#destroy"
+     patch 'my_pages/renew' => "my_pages#renew"
+     delete 'my_pages/:id', to: "my_pages#delete", as: 'my_pages_delete'
      
-     get "discoveries" => "discoveries#index"
-     get 'discoveries/:id' => "discoveries#show"
-     post "discoveries" => "discoveries#create"
+     resources :discoveries, only: [:index, :show, :create]
 
   end
   
@@ -34,21 +32,12 @@ Rails.application.routes.draw do
   sessions: "admin/sessions"}
   
   namespace :admin do
-     get "members" => "members#index"
-     get 'members/:id/edit' => "members#edit"
-     patch "members/:id" => "members#update"
 
-     get "discoveries" => "discoveries#index"
-     get 'discoveries/:id/edit' => "discoveries#edit"
-     patch "discoveries/:id" => "discoveries#update"
+     resources :members, only: [:index, :edit, :update]
+     resources :discoveries, only: [:index, :edit, :update]
+     resources :reviews, only: [:index, :edit, :update]
+     resources :genres, only: [:index, :create, :update]
 
-     get "reviews" => "reviews#index"
-     get 'reviews/:id/edit' => "reviews#edit"
-     patch "reviews/:id" => "reviews#update"
-
-     get "genres" => "genres#index"
-     post 'genres/:id/edit' => "genres#create"
-     patch "genres/:id" => "genres#update"
   end
   
 end

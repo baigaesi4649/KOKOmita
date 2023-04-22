@@ -3,12 +3,12 @@
 <table class="table">
  <tbody>
   <tr>
-  <td>名前</td>
-  <td><%= f.text_field :name %></td>
-  </tr>
-　<tr>
    <td>メールアドレス</td>
    <td><%= f.email_field :email %></td>
+  </tr>
+  <tr>
+   <td>名前</td>
+   <td><%= f.text_field :name %></td>
   </tr>
   <tr>
    <td>ユーザー名</td>
@@ -18,31 +18,47 @@
  </table>
   <%= f.submit '更新',class: "btn btn btn-success btn-sm"%>
   <%= link_to "退会", public_my_pages_withdraw_path,class: "btn btn-danger btn-sm" %>
-　<tr>
-   <td>評価</td>
-   <td><%= f.number_field :score,min:1,max:5 %></td>
-  </tr>
 <% end %>
+
+<p>評価:</P>
+<div id="post_raty"></div>
+
+<script>
+var elem = document.getElementById('post_raty');
+var opt = {  
+    starOn: "<%= asset_path('star-on.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
+    starHalf: "<%= asset_path('star-half.png') %>",
+  };
+  raty(elem,opt);
+</script>
 
 新しい発見
 
-<%= form_with model: @discovery, url:'/lists' do |f| %>
-
-  <h4>題名</h4>
-  <%= f.text_field :title %>
-  
-  <h4>説明</h4>
-  <%= f.text_area :explanation %>
-  
-  <h4>画像１(左下）</h4>
-  <%= f.file_field :image1, accept: "image/*" %>
-  
-  <h4>画像２(右上）</h4>
-  <%= f.file_field :image2, accept: "image/*" %>
-  
-  <h4>ジャンル名</h4>
-  <%= f.text_area :genre %>
-  
+<%= form_with model: @discovery, url: public_my_pages_path, method: :post do |f| %>
+<table class="table">
+ <tbody>
+  <tr>
+   <td>題名</td>
+   <td><%= f.text_field :title %></td>
+  </tr>
+  <tr>
+   <td>説明</td>
+   <td><%= f.text_area :explanation %></td>
+  </tr>
+  <tr>
+   <td>画像１(左下）</td>
+   <td><%= f.file_field :image1, accept: "image/*" %></td>
+  </tr>
+  <tr>
+   <td>画像２(右上）</td>
+   <td><%= f.file_field :image2, accept: "image/*" %></td>
+  </tr>
+  <tr>
+   <td>ジャンル名</td>
+   <td><%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :genre_name) %></td>
+  </tr>
+ </tbody> 
+ </table>  
   <%= f.submit '発見' %>
-  
 <% end %>

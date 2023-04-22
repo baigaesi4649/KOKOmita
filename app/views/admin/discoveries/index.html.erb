@@ -1,0 +1,33 @@
+<table class="table">
+<tbody>
+<tr>
+ <th>会員ID</th>
+ <th>氏名</th>
+ <th>ユーザー名</th>
+ <th>メールアドレス</th>
+ <th>発見件数</th>
+ <th>レビュー平均評価</th>
+ <th>レビュー件数</th>
+ <th>コメント件数</th>
+ <th>退会ステータス</th>
+</tr>
+<% @members.each do |member| %>
+<tr>
+  <td><%= member.id %></td>
+  <td><%= member.name %></td>
+  <td><%= member.user_name %></td>
+  <td><%= member.email %></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <% if member.is_cancelled == true %>
+  退会
+  <% else %>
+  登録
+  <% end %>
+  </td>
+</tr>
+<% end %>
+</tbody>
+</table>

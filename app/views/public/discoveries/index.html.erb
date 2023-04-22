@@ -1,0 +1,26 @@
+<% @discoveries.each do |discovery| %>
+<table class="table">
+ <tbody>
+  <tr>
+   <td>題名</td>
+   <td><%= discovery.title %></td>
+  </tr>
+  <tr>
+   <td>説明</td>
+   <td><%= discovery.explanation %></td>
+  </tr>
+  <tr>
+   <td>画像１(左下）</td>
+   <td><%= image_tag discovery.get_image(300,300, discovery.image1) %></td>
+  </tr>
+  <tr>
+   <td>画像２(右上）</td>
+   <td><%= image_tag discovery.get_image(300,300, discovery.image2)%></td>
+  </tr>
+  <tr>
+   <td>ジャンル名</td>
+   <td><%= discovery.genre.genre_name  %></td>
+  </tr>
+ </tbody>
+ </table>  
+<% end %>

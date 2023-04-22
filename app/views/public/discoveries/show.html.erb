@@ -1,0 +1,56 @@
+会員情報
+<table class="table">
+<tbody>
+<tr>
+ <td>ユーザー名</td>
+ <td><%= @member.user_name %></td>
+</tr>
+<tr>
+ <td>発見数</td>
+ <td></td>
+</tr>
+<tr>
+ <td>レビュー平均評価</td>
+ <td></td>
+</tr>
+<tr>
+ <td>コメント一覧</td>
+ <td></td>
+</tr>
+</tbody>
+</table>
+
+レビュー・コメント投稿
+<%= form_with model: @review, url: public_discoveries_path, method: :post do |f| %>
+<table class="table">
+ <tbody>
+  <tr>
+   <td>ユーザー名</td>
+   <td><%= current_member.user_name %></td>
+  </tr>
+  <tr>
+   <td>レビュー</td>
+   <td>
+       <div id="post_raty" ></div>
+   <script>
+    var elem = document.getElementById('post_raty');
+    var opt = {  
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        // score: <%#= @review.review_score %>,
+        // readOnly: true,
+      };
+      raty(elem,opt);
+   </script>
+   </td>
+  </tr>
+  <tr>
+   <td>コメント</td>
+   <td><%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %></td>
+  </tr>
+ </tbody> 
+ </table>  
+  <%= f.submit '発見' %>
+<% end %>
+
