@@ -1,17 +1,21 @@
 class Public::MyPagesController < ApplicationController
     
   def index
-   @member = current_member
+    @member = current_member
+    @discovery = Discovery.new
   end
   
   def create
-   @discovery = Discovery.new(discoveries_params)
-   @discovery.member_id = current_member.id
-   genre_id = Genre.find_by(genre_name: params[:discovery][:genre_id]).id
-   Discovery.create(discoveries_params.merge(genre_id: genre_id))
+    @discovery = Discovery.new(discoveries_params)
+    @discovery.member_id = current_member.id
+    #genre_id = Genre.find_by(genre_name: params[:discovery][:genre_id]).id
+    #Discovery.create(discoveries_params.merge(genre_id: genre_id))
    if @discovery.save
-   #flash[:notice] = "You have created book successfully."
-   redirect_to public_my_pages_show_path(current_member.id)
+     #flash[:notice] = "You have created book successfully."
+     redirect_to public_my_pages_show_path(@discovery.id)
+   else
+     @member = current_member
+     render :index
    end
   end
   

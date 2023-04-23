@@ -5,6 +5,8 @@ class Discovery < ApplicationRecord
  has_many :review, dependent: :destroy    
  belongs_to :member
  belongs_to :genre
+ validates :title, presence: true
+ validates :explanation, presence: true
  
  def get_image(width,height, image)
   unless image.attached?

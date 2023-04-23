@@ -8,6 +8,10 @@ class Public::DiscoveriesController < ApplicationController
    @member = Member.find(params[:id])
    @review = Review.new
   end
+  
+  def search
+   @discoveries = Discovery.where('title LIKE ?', "%#{params[:keyword]}%")
+  end
 
   private
   
