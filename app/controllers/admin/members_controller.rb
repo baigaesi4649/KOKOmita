@@ -5,12 +5,19 @@ class Admin::MembersController < ApplicationController
   end
 
   def show
-   @item=Item.find(params[:id])
-   @cart_item=CartItem.new
+    @member = Member.find(params[:id])
+  end
+  
+  def update
+   @member = Member.find(params[:id])
+   if @member.update(members_params)
+   #flash[:notice] = "You have updated user successfully."
+   redirect_to  admin_members_path
+   end
   end
 
   private
-  def item_params
+  def member_params
    params.require(:member).permit(:name,:user_name,:email,:encrypted_password,:is_cancelled)
   end
   

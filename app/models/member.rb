@@ -7,6 +7,20 @@ class Member < ApplicationRecord
 has_many :review, dependent: :destroy
 has_many :discovery, dependent: :destroy
 
+def self.looks(search, word)
+  if search == "perfect_match"
+    @member = Member.where("name LIKE?", "#{word}")
+  elsif search == "forward_match"
+    @member = Member.where("name LIKE?","#{word}%")
+  elsif search == "backward_match"
+    @member = Member.where("name LIKE?","%#{word}")
+  elsif search == "partial_match"
+    @member = Member.where("name LIKE?","%#{word}%")
+  else
+    @member = Member.all
+  end
+end
+  
 def self.guest
     find_or_create_by!(email: 'a@a') do |member|
       member.name = "ゲスト" 

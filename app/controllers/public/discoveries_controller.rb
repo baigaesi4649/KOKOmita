@@ -10,7 +10,14 @@ class Public::DiscoveriesController < ApplicationController
   end
   
   def search
-   @discoveries = Discovery.where('title LIKE ?', "%#{params[:keyword]}%")
+  @range = params[:range]
+
+  if @range == "Member"
+    @members = Member.looks(params[:search], params[:word])
+  else
+    @discoveries = Discovery.looks(params[:search], params[:word])
+  end
+   #@discoveries = Discovery.where('title LIKE ?', "%#{params[:keyword]}%")
   end
 
   private

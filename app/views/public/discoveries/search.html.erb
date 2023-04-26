@@ -1,0 +1,38 @@
+<table class="table table-hover table-inverse">
+  <!--検索対象モデルがUserの時 -->
+  <% if @range == "Member" %>
+    <tbody>
+      <% @members.each do |member| %>
+        <tr>
+          <td><%= member.user_name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  <% else %>
+    <!--検索対象モデルがUserではない時(= 検索対象モデルがBookの時) -->
+    <tbody>
+  <% @discoveries.each do |discovery| %>
+    <tr>
+      <td>題名</td>
+      <td><%= discovery.title %></td>
+    </tr>
+    <tr>
+      <td>説明</td>
+      <td><%= discovery.explanation %></td>
+    </tr>
+    <tr>
+      <td>画像１(左下）</td>
+      <td><%= image_tag discovery.get_image(300,300, discovery.image1) %></td>
+    </tr>
+    <tr>
+      <td>画像２(右上）</td>
+      <td><%= image_tag discovery.get_image(300,300, discovery.image2)%></td>
+    </tr>
+    <tr>
+      <td>ジャンル名</td>
+      <td><%= discovery.genre.genre_name  %></td>
+    </tr>
+  <% end %>
+    </tbody>
+  <% end %>
+</table>

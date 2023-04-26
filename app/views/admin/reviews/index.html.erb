@@ -1,0 +1,26 @@
+<table class="table">
+ <tbody>
+  <tr>
+  <th>レビューID</th>
+  <th>ユーザー名</th>
+  <th>レビュー</th>
+  <th>コメント</th>
+  <th>レビューステータス</th>
+  </tr>
+  <% @reviews.each do |review| %>
+  <tr>
+   <td><%= review.id %></td>
+   <td><%= review.member.user_name %></td>
+   <td><%= review.review_score %></td>
+   <td><%= review.comment %></td>
+   <td>
+     <% if review.is_cleared == true %>
+     削除済み
+     <% else %>
+     問題なし
+     <% end %>
+   </td>
+  </tr>
+  <% end %>
+ </tbody>
+ </table>  

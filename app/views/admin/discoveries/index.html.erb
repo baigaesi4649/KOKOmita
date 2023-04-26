@@ -1,33 +1,34 @@
 <table class="table">
-<tbody>
-<tr>
- <th>会員ID</th>
- <th>氏名</th>
- <th>ユーザー名</th>
- <th>メールアドレス</th>
- <th>発見件数</th>
- <th>レビュー平均評価</th>
- <th>レビュー件数</th>
- <th>コメント件数</th>
- <th>退会ステータス</th>
-</tr>
-<% @members.each do |member| %>
-<tr>
-  <td><%= member.id %></td>
-  <td><%= member.name %></td>
-  <td><%= member.user_name %></td>
-  <td><%= member.email %></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <% if member.is_cancelled == true %>
-  退会
-  <% else %>
-  登録
+ <tbody>
+  <tr>
+  <th>発見ID</th>
+  <th>題名</th>
+  <th>説明</th>
+  <th>画像１</th>
+  <th>画像２</th>
+  <th>ジャンル名</th>
+  <th>レビュー平均評価</th>
+  <th>レビュー件数</th>
+  <th>発見ステータス</th>
+  </tr>
+  <% @discoveries.each do |discovery| %>
+  <tr>
+   <td><%= discovery.id %></td>
+   <td><%= discovery.title %></td>
+   <td><%= discovery.explanation %></td>
+   <td><%= image_tag discovery.get_image(300,300, discovery.image1) %></td>
+   <td><%= image_tag discovery.get_image(300,300, discovery.image2) %></td>
+   <td><%= discovery.genre.genre_name  %></td>
+   <td><%#= discovery.email %></td>
+   <td><%#= discovery.email %></td>
+   <td>
+     <% if discovery.is_deleted == true %>
+     削除済み
+     <% else %>
+     問題なし
+     <% end %>
+   </td>
+  </tr>
   <% end %>
-  </td>
-</tr>
-<% end %>
-</tbody>
-</table>
+ </tbody>
+ </table>  
