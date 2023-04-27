@@ -21,6 +21,7 @@ Rails.application.routes.draw do
      patch 'my_pages/withdraw' => "my_pages#withdraw"
      patch 'my_pages/renew' => "my_pages#renew"
      delete 'my_pages/:id', to: "my_pages#delete", as: 'my_pages_delete'
+     resources :reviews, only:[:create]
      
      resources :discoveries, only: [:index, :show, :create] do
        collection do

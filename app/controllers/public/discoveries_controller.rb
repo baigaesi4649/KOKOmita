@@ -5,7 +5,8 @@ class Public::DiscoveriesController < ApplicationController
   end
 
   def show
-   @member = Member.find(params[:id])
+   @member = current_member
+   @discovery = Discovery.find(params[:id])
    @review = Review.new
   end
   

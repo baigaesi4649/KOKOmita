@@ -21,7 +21,7 @@
 </table>
 
 レビュー・コメント投稿
-<%= form_with model: @review, url: public_discoveries_path, method: :post do |f| %>
+<%= form_with model: @review, url: public_reviews_path, method: :post do |f| %>
 <table class="table">
  <tbody>
   <tr>
@@ -38,8 +38,7 @@
         starOn: "<%= asset_path('star-on.png') %>",
         starOff: "<%= asset_path('star-off.png') %>",
         starHalf: "<%= asset_path('star-half.png') %>",
-        // score: <%#= @review.review_score %>,
-        // readOnly: true,
+        scoreName: "review[review_score]",
       };
       raty(elem,opt);
    </script>
@@ -51,6 +50,7 @@
   </tr>
  </tbody> 
  </table>  
+  <%= f.hidden_field :discovery_id, value: @discovery.id %>
   <%= f.submit '発見' %>
 <% end %>
 

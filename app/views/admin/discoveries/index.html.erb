@@ -14,7 +14,7 @@
   <% @discoveries.each do |discovery| %>
   <tr>
    <td><%= discovery.id %></td>
-   <td><%= discovery.title %></td>
+   <td><%= link_to discovery.title, edit_admin_discovery_path(discovery.id) %></td>
    <td><%= discovery.explanation %></td>
    <td><%= image_tag discovery.get_image(300,300, discovery.image1) %></td>
    <td><%= image_tag discovery.get_image(300,300, discovery.image2) %></td>

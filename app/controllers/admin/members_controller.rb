@@ -18,7 +18,7 @@ class Admin::MembersController < ApplicationController
 
   private
   def member_params
-   params.require(:member).permit(:name,:user_name,:email,:encrypted_password,:is_cancelled)
+   params.require(:member).permit(:id,:name,:user_name,:email,:encrypted_password,:is_cancelled)
   end
   
 end
