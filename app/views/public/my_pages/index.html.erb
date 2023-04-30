@@ -26,11 +26,13 @@
  </tbody>
  </table>
   <%= f.submit '更新',class: "btn btn btn-success btn-sm"%>
-  <%= link_to "退会", public_my_pages_withdraw_path,class: "btn btn-danger btn-sm" %>
+  <%= link_to "退会", public_my_pages_withdraw_path,method: :patch,data: {confirm: "削除しますか？"},class: "btn btn-danger btn-sm" %>
 <% end %>
 
 <p>評価:</P>
 <div id="post_raty"></div>
+
+<%#= current_member.discoveries.find(params[:id]).count %>
 
 <script>
 var elem = document.getElementById('post_raty');
@@ -38,8 +40,8 @@ var opt = {
     starOn: "<%= asset_path('star-on.png') %>",
     starOff: "<%= asset_path('star-off.png') %>",
     starHalf: "<%= asset_path('star-half.png') %>",
-    readOnly: true,  
-    score: <%= @review.review_score %>,
+    // readOnly: true,  
+    // score: <%#= @review.review_score %>,
   };
   raty(elem,opt);
 </script>
@@ -72,4 +74,31 @@ var opt = {
  </tbody> 
  </table>  
   <%= f.submit '発見' %>
+<% end %>
+
+<% @discoveries.each do |discovery| %>
+<table class="table">
+ <tbody>
+  <tr>
+   <td>題名</td>
+   <td><%= link_to discovery.title, public_my_pages_show_path(discovery.id) %></td>
+  </tr>
+  <tr>
+   <td>説明</td>
+   <td><%= discovery.explanation %></td>
+  </tr>
+  <tr>
+   <td>画像１(左下）</td>
+   <td><%= image_tag discovery.get_image(300,300, discovery.image1) %></td>
+  </tr>
+  <tr>
+   <td>画像２(右上）</td>
+   <td><%= image_tag discovery.get_image(300,300, discovery.image2) %></td>
+  </tr>
+  <tr>
+   <td>ジャンル名</td>
+   <td><%= discovery.genre.genre_name  %></td>
+  </tr>
+ </tbody>
+ </table>  
 <% end %>

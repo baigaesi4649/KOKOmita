@@ -4,8 +4,8 @@ class Member < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
          
-has_many :review, dependent: :destroy
-has_many :discovery, dependent: :destroy
+has_many :reviews, dependent: :destroy
+has_many :discoveries, dependent: :destroy
 
 def self.looks(search, word)
   if search == "perfect_match"

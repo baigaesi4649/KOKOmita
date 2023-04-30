@@ -3,6 +3,7 @@ class Public::MyPagesController < ApplicationController
   def index
     @member = current_member
     @discovery = Discovery.new
+    @discoveries = current_member.discoveries
   end
   
   def create
@@ -30,6 +31,20 @@ class Public::MyPagesController < ApplicationController
    redirect_to  public_my_pages_path
    end
   end
+  
+  
+  def withdraw
+   @member = current_member
+   @member.update(is_cancelled: true)
+   reset_session
+   redirect_to root_path
+  end  
+  
+#   def destroy
+#     cart_item = CartItem.find(params[:id])
+#     cart_item.destroy
+#     redirect_to public_cart_items_path
+#   end
   
   private
   def members_params

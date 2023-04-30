@@ -1,0 +1,32 @@
+<%= form_with model: @review, url:  admin_review_path, method: :patch do |f| %>
+<table class="table">
+ <tbody>
+  <tr>
+   <td>レビューID</td>
+   <td><%= @review.id %></td>
+  </tr>
+  <tr>
+   <td>ユーザー名</td>
+   <td><%= @review.member.user_name %></td>
+  </tr>
+  <tr>
+   <td>レビュー</td>
+   <td><%= @review.review_score %></td>
+  </tr>
+　<tr>
+   <td>コメント</td>
+   <td><%= f.text_area :comment %></td>
+  </tr>
+  <tr>
+   <td>発見ステータス</td>
+   <td>
+     <%= f.radio_button :is_cleared, :false %>
+     <%= f.label :is_cleared, "問題なし" %>
+     <%= f.radio_button :is_cleared, :true %>
+     <%= f.label :is_cleared, "削除済み" %>
+   </td>
+  </tr>
+ </tbody>
+ </table>
+  <%= f.submit '変更を保存',class: "btn btn btn-success btn-sm"%>
+<% end %>

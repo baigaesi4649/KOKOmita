@@ -2,6 +2,8 @@ class Admin::MembersController < ApplicationController
 
   def index
     @members = Member.all
+    #@member = Member.find(params[:id])
+    #@average = @member.reviews.sum(0.0)/reviews.length
   end
 
   def show
@@ -10,7 +12,7 @@ class Admin::MembersController < ApplicationController
   
   def update
    @member = Member.find(params[:id])
-   if @member.update(members_params)
+   if @member.update(member_params)
    #flash[:notice] = "You have updated user successfully."
    redirect_to  admin_members_path
    end
@@ -18,7 +20,7 @@ class Admin::MembersController < ApplicationController
 
   private
   def member_params
-   params.require(:member).permit(:id,:name,:user_name,:email,:encrypted_password,:is_cancelled)
+   params.require(:member).permit(:name,:user_name,:email,:encrypted_password,:is_cancelled)
   end
   
 end

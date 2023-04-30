@@ -10,7 +10,7 @@
   <% @reviews.each do |review| %>
   <tr>
    <td><%= review.id %></td>
-   <td><%= review.member.user_name %></td>
+   <td><%= link_to review.member.user_name,  edit_admin_review_path(review.id) %></td>
    <td><%= review.review_score %></td>
    <td><%= review.comment %></td>
    <td>

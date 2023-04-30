@@ -3,7 +3,7 @@
  <tbody>
   <tr>
    <td>題名</td>
-   <td><%= discovery.title %></td>
+   <td><%= link_to discovery.title, public_discovery_path(discovery.id) %></td>
   </tr>
   <tr>
    <td>説明</td>
