@@ -1,32 +1,5 @@
-ピックアップ
-<table class="table">
-<tbody>
-<tr>
- <td>題名</td>
- <td><%= @discovery.title %></td>
-</tr>
-<tr>
- <td>説明</td>
- <td><%= @discovery.explanation %></td>
-</tr>
-<tr>
-
- <td>画像１(左下）</td>
- <td><%= image_tag @discovery.get_image(300,300, @discovery.image1) %></td>
-</tr>
-<tr>
- <td>画像２(右上）</td>
- <td><%= image_tag  @discovery.get_image(300,300, @discovery.image2)%></td>
-</tr>
-<tr>
- <td>ジャンル名</td>
- <td><%= @discovery.genre.genre_name %></td>
-</tr>
-</tbody>
-</table>
-
 アップデート
-<%= form_with model: @discovery, url:  public_my_pages_renew_path, method: :patch do |f| %>
+<%= form_with model: @discovery, url:  public_my_pages_renew_path(@discovery.id), method: :patch do |f| %>
 <table class="table">
  <tbody>
   <tr>
@@ -54,3 +27,50 @@
   <%= f.submit '更新',class: "btn btn btn-success btn-sm"%>
   <%= link_to "削除",  public_my_pages_delete_path(current_member.id),method: :delete,class: "btn btn-danger btn-sm" %>
 <% end %>
+
+ピックアップ
+<table class="table">
+<tbody>
+<tr>
+ <td>題名</td>
+ <td><%= @discovery.title %></td>
+</tr>
+<tr>
+ <td>説明</td>
+ <td><%= @discovery.explanation %></td>
+</tr>
+<tr>
+
+ <td>画像１(左下）</td>
+ <td><%= image_tag @discovery.get_image(300,300, @discovery.image1) %></td>
+</tr>
+<tr>
+ <td>画像２(右上）</td>
+ <td><%= image_tag  @discovery.get_image(300,300, @discovery.image2)%></td>
+</tr>
+<tr>
+ <td>ジャンル名</td>
+ <td><%= @discovery.genre.genre_name %></td>
+</tr>
+</tbody>
+</table>
+
+<b>みんなのレビュー・コメント</b>
+<table class="table">
+<% @discovery.reviews.each do |review| %>
+  <tbody>
+    <tr>
+      <td>ユーザー名</td>
+      <td><%= review.member.user_name %></td>
+    </tr>
+    <tr>
+      <td>レビュー</td>
+      <td><%= review.review_score %></td>
+    </tr>
+    <tr>
+      <td>コメント</td>
+      <td><%= review.comment %></td>
+    </tr>
+  </tbody>
+<% end %>
+</table>  

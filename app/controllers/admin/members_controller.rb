@@ -6,7 +6,7 @@ class Admin::MembersController < ApplicationController
     #@average = @member.reviews.sum(0.0)/reviews.length
   end
 
-  def show
+  def edit
     @member = Member.find(params[:id])
   end
   

@@ -40,11 +40,19 @@ class Public::MyPagesController < ApplicationController
    redirect_to root_path
   end  
   
-#   def destroy
-#     cart_item = CartItem.find(params[:id])
-#     cart_item.destroy
-#     redirect_to public_cart_items_path
-#   end
+  def renew
+   @discovery = Discovery.find(params[:id])
+   if @discovery.update(discoveries_params)
+   #flash[:notice] = "You have updated user successfully."
+   redirect_to  public_my_pages_path
+   end
+  end
+  
+  def destroy
+    discovery = Discovery.find(params[:id])
+    discovery.destroy
+    redirect_to public_my_pages_path
+  end
   
   private
   def members_params
@@ -52,7 +60,7 @@ class Public::MyPagesController < ApplicationController
    #params.require(:discovery).permit(:member_id,:genre_id,:title,:explanation,:is_deleted)
   end
   def discoveries_params
-   params.permit(:member_id, :genre_id, :title, :explanation, :is_deleted, :image1, :image2, :genre_name)
+   params.require(:discovery).permit(:member_id, :genre_id, :title, :explanation, :is_deleted, :image1, :image2)
    #params.require(:discovery).permit(:member_id,:genre_id,:title,:explanation,:is_deleted)
   end
 end

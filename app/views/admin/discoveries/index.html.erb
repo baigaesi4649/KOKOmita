@@ -1,3 +1,4 @@
+<b>発見一覧</b>
 <table class="table">
  <tbody>
   <tr>
@@ -20,7 +21,7 @@
    <td><%= image_tag discovery.get_image(300,300, discovery.image2) %></td>
    <td><%= discovery.genre.genre_name  %></td>
    <td><%#= discovery.email %></td>
-   <td><%#= discovery.email %></td>
+   <td><%= discovery.reviews.count %></td>
    <td>
      <% if discovery.is_deleted == true %>
      削除済み

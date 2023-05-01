@@ -22,7 +22,7 @@ def self.looks(search, word)
 end
   
 def self.guest
-    find_or_create_by!(email: 'a@a') do |member|
+    find_or_create_by!(email: 'guest@guest') do |member|
       member.name = "ゲスト" 
       member.user_name = "ゲスト"
       member.password = 123456

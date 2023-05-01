@@ -1,5 +1,5 @@
 <% if @discovery.errors.any? %>
-  <h3><%= @discovery.errors.count %>errors prohibited this obj from being saved:</h3>
+<h3><%= @discovery.errors.count %>errors prohibited this obj from being saved:</h3>
   <ul>
     <% @discovery.errors.full_messages.each do |message| %>
       <li><%= message %></li>
@@ -7,98 +7,112 @@
   </ul>
 <% end %>
 
-会員情報
+<b>会員情報</b>
 <%= form_with model: @member, url: public_my_pages_path, method: :patch do |f| %>
 <table class="table">
- <tbody>
-  <tr>
-   <td>メールアドレス</td>
-   <td><%= f.email_field :email %></td>
-  </tr>
-  <tr>
-   <td>名前</td>
-   <td><%= f.text_field :name %></td>
-  </tr>
-  <tr>
-   <td>ユーザー名</td>
-   <td><%= f.text_field :user_name %></td>
-  </tr>
- </tbody>
- </table>
-  <%= f.submit '更新',class: "btn btn btn-success btn-sm"%>
-  <%= link_to "退会", public_my_pages_withdraw_path,method: :patch,data: {confirm: "削除しますか？"},class: "btn btn-danger btn-sm" %>
+  <tbody>
+    <tr>
+      <td>メールアドレス</td>
+      <td><%= f.email_field :email %></td>
+    </tr>
+    <tr>
+      <td>名前</td>
+      <td><%= f.text_field :name %></td>
+    </tr>
+    <tr>
+      <td>ユーザー名</td>
+      <td><%= f.text_field :user_name %></td>
+    </tr>
+  </tbody>
+</table>
+<% unless @member.email == "guest@guest" %>
+<%= f.submit '更新',class: "btn btn btn-success btn-sm"%>
+<%= link_to "退会", public_my_pages_withdraw_path,method: :patch,data: {confirm: "削除しますか？"},class: "btn btn-danger btn-sm" %>
+<% end %>
+<table class="table">
+  <tbody>
+    <tr>
+      <td>発見件数</td>
+      <td><%= @member.discoveries.count %></td>
+    </tr>
+    <tr>
+      <td>レビュー平均評価</td>
+      <td>
+      <div id="post_raty"></div>
+        <script>
+        var elem = document.getElementById('post_raty');
+        var opt = {  
+            starOn: "<%= asset_path('star-on.png') %>",
+            starOff: "<%= asset_path('star-off.png') %>",
+            starHalf: "<%= asset_path('star-half.png') %>",
+            // readOnly: true,  
+            // score: <%#= @review.review_score %>,
+          };
+          raty(elem,opt);
+        </script>
+      </td>
+    </tr>
+    <tr>
+      <td>レビュー件数</td>
+      <td><%= @member.reviews.count %></td>
+    </tr>
+  </tbody>
+</table>
 <% end %>
 
-<p>評価:</P>
-<div id="post_raty"></div>
-
-<%#= current_member.discoveries.find(params[:id]).count %>
-
-<script>
-var elem = document.getElementById('post_raty');
-var opt = {  
-    starOn: "<%= asset_path('star-on.png') %>",
-    starOff: "<%= asset_path('star-off.png') %>",
-    starHalf: "<%= asset_path('star-half.png') %>",
-    // readOnly: true,  
-    // score: <%#= @review.review_score %>,
-  };
-  raty(elem,opt);
-</script>
-
-新しい発見
-
+<b>新しい発見</b>
 <%= form_with model: @discovery, url: public_my_pages_path, method: :post do |f| %>
 <table class="table">
- <tbody>
-  <tr>
-   <td>題名</td>
-   <td><%= f.text_field :title %></td>
-  </tr>
-  <tr>
-   <td>説明</td>
-   <td><%= f.text_area :explanation %></td>
-  </tr>
-  <tr>
-   <td>画像１(左下）</td>
-   <td><%= f.file_field :image1, accept: "image/*" %></td>
-  </tr>
-  <tr>
-   <td>画像２(右上）</td>
-   <td><%= f.file_field :image2, accept: "image/*" %></td>
-  </tr>
-  <tr>
-   <td>ジャンル名</td>
-   <td><%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :genre_name) %></td>
-  </tr>
- </tbody> 
- </table>  
+  <tbody>
+    <tr>
+      <td>題名</td>
+      <td><%= f.text_field :title %></td>
+    </tr>
+    <tr>
+      <td>説明</td>
+      <td><%= f.text_area :explanation %></td>
+    </tr>
+    <tr>
+      <td>画像１(左下）</td>
+      <td><%= f.file_field :image1, accept: "image/*" %></td>
+    </tr>
+    <tr>
+      <td>画像２(右上）</td>
+      <td><%= f.file_field :image2, accept: "image/*" %></td>
+    </tr>
+    <tr>
+      <td>ジャンル名</td>
+      <td><%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :genre_name) %></td>
+    </tr>
+  </tbody> 
+</table>  
   <%= f.submit '発見' %>
 <% end %>
 
+<b>今までの発見</b>
 <% @discoveries.each do |discovery| %>
 <table class="table">
- <tbody>
-  <tr>
-   <td>題名</td>
-   <td><%= link_to discovery.title, public_my_pages_show_path(discovery.id) %></td>
-  </tr>
-  <tr>
-   <td>説明</td>
-   <td><%= discovery.explanation %></td>
-  </tr>
-  <tr>
-   <td>画像１(左下）</td>
-   <td><%= image_tag discovery.get_image(300,300, discovery.image1) %></td>
-  </tr>
-  <tr>
-   <td>画像２(右上）</td>
-   <td><%= image_tag discovery.get_image(300,300, discovery.image2) %></td>
-  </tr>
-  <tr>
-   <td>ジャンル名</td>
-   <td><%= discovery.genre.genre_name  %></td>
-  </tr>
- </tbody>
- </table>  
+  <tbody>
+    <tr>
+      <td>題名</td>
+      <td><%= link_to discovery.title, public_my_pages_show_path(discovery.id) %></td>
+    </tr>
+    <tr>
+      <td>説明</td>
+      <td><%= discovery.explanation %></td>
+    </tr>
+    <tr>
+      <td>画像１(左下）</td>
+      <td><%= image_tag discovery.get_image(300,300, discovery.image1) %></td>
+    </tr>
+    <tr>
+      <td>画像２(右上）</td>
+      <td><%= image_tag discovery.get_image(300,300, discovery.image2) %></td>
+    </tr>
+    <tr>
+      <td>ジャンル名</td>
+      <td><%= discovery.genre.genre_name  %></td>
+    </tr>
+  </tbody>
+</table>  
 <% end %>
