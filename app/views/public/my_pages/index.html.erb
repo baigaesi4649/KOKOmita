@@ -6,113 +6,119 @@
     <% end %>
   </ul>
 <% end %>
+<div class="container">
+  <div class="row">
+   
+    <div class="col-5 m-1">
+        
+      <div class="border border-dark">
+        <h4>新しい発見</h4>
+        <%= form_with model: @discovery, url: public_my_pages_path, method: :post do |f| %>
+        <table class="table table-borderless">
+          <tbody>
+            <tr>
+              <th>題名</th>
+              <td><%= f.text_field :title %></td>
+            </tr>
+            <tr>
+              <th>説明</th>
+              <td><%= f.text_area :explanation %></td>
+            </tr>
+            <tr>
+              <th>画像１</th>
+              <td><%= f.file_field :image1, accept: "image/*" %></td>
+            </tr>
+            <tr>
+              <th>画像２</th>
+              <td><%= f.file_field :image2, accept: "image/*" %></td>
+            </tr>
+            <tr>
+              <th>ジャンル名</th>
+              <td><%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :genre_name) %></td>
+            </tr>
+          </tbody> 
+        </table>  
+      <div class="text-center">  
+          <%= f.submit '発見',class: "mb-3 p-3" %>
+        <% end %>
+      </div>
+      </div>
 
-<b>会員情報</b>
-<%= form_with model: @member, url: public_my_pages_path, method: :patch do |f| %>
-<table class="table">
-  <tbody>
-    <tr>
-      <td>メールアドレス</td>
-      <td><%= f.email_field :email %></td>
-    </tr>
-    <tr>
-      <td>名前</td>
-      <td><%= f.text_field :name %></td>
-    </tr>
-    <tr>
-      <td>ユーザー名</td>
-      <td><%= f.text_field :user_name %></td>
-    </tr>
-  </tbody>
-</table>
-<% unless @member.email == "guest@guest" %>
-<%= f.submit '更新',class: "btn btn btn-success btn-sm"%>
-<%= link_to "退会", public_my_pages_withdraw_path,method: :patch,data: {confirm: "削除しますか？"},class: "btn btn-danger btn-sm" %>
-<% end %>
-<table class="table">
-  <tbody>
-    <tr>
-      <td>発見件数</td>
-      <td><%= @member.discoveries.count %></td>
-    </tr>
-    <tr>
-      <td>レビュー平均評価</td>
-      <td>
-      <div id="post_raty"></div>
-        <script>
-        var elem = document.getElementById('post_raty');
-        var opt = {  
-            starOn: "<%= asset_path('star-on.png') %>",
-            starOff: "<%= asset_path('star-off.png') %>",
-            starHalf: "<%= asset_path('star-half.png') %>",
-            // readOnly: true,  
-            // score: <%#= @review.review_score %>,
-          };
-          raty(elem,opt);
-        </script>
-      </td>
-    </tr>
-    <tr>
-      <td>レビュー件数</td>
-      <td><%= @member.reviews.count %></td>
-    </tr>
-  </tbody>
-</table>
-<% end %>
-
-<b>新しい発見</b>
-<%= form_with model: @discovery, url: public_my_pages_path, method: :post do |f| %>
-<table class="table">
-  <tbody>
-    <tr>
-      <td>題名</td>
-      <td><%= f.text_field :title %></td>
-    </tr>
-    <tr>
-      <td>説明</td>
-      <td><%= f.text_area :explanation %></td>
-    </tr>
-    <tr>
-      <td>画像１(左下）</td>
-      <td><%= f.file_field :image1, accept: "image/*" %></td>
-    </tr>
-    <tr>
-      <td>画像２(右上）</td>
-      <td><%= f.file_field :image2, accept: "image/*" %></td>
-    </tr>
-    <tr>
-      <td>ジャンル名</td>
-      <td><%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :genre_name) %></td>
-    </tr>
-  </tbody> 
-</table>  
-  <%= f.submit '発見' %>
-<% end %>
-
-<b>今までの発見</b>
-<% @discoveries.each do |discovery| %>
-<table class="table">
-  <tbody>
-    <tr>
-      <td>題名</td>
-      <td><%= link_to discovery.title, public_my_pages_show_path(discovery.id) %></td>
-    </tr>
-    <tr>
-      <td>説明</td>
-      <td><%= discovery.explanation %></td>
-    </tr>
-    <tr>
-      <td>画像１(左下）</td>
-      <td><%= image_tag discovery.get_image(300,300, discovery.image1) %></td>
-    </tr>
-    <tr>
-      <td>画像２(右上）</td>
-      <td><%= image_tag discovery.get_image(300,300, discovery.image2) %></td>
-    </tr>
-    <tr>
-      <td>ジャンル名</td>
-      <td><%= discovery.genre.genre_name  %></td>
-    </tr>
-  </tbody>
-</table>  
-<% end %>
+      <div class=" mt-5 border border-dark">
+        <h4>会員情報</h4>
+        <%= form_with model: @member, url: public_my_pages_path, method: :patch do |f| %>
+        <table class="table table-borderless">
+          <tbody>
+            <tr>
+              <th>メールアドレス</th>
+              <td><%= f.email_field :email %></td>
+            </tr>
+            <tr>
+              <th>名前</th>
+              <td><%= f.text_field :name %></td>
+            </tr>
+            <tr>
+              <th>ユーザー名</th>
+              <td><%= f.text_field :user_name %></td>
+            </tr>
+          </tbody>
+        </table>
+      <div class="text-center">  
+        <% unless @member.email == "guest@guest" %>
+        <%= f.submit '更新',class: "button mr-3"%>
+        <%= link_to "退会", public_my_pages_withdraw_path,method: :patch,data: {confirm: "削除しますか？"},class: "btn btn-light" %>
+        <% end %>
+      </div>
+        <table class="table table-borderless">
+          <tbody>
+            <tr>
+              <th>発見件数</th>
+              <td><%= @member.discoveries.count %></td>
+            </tr>
+            <tr>
+              <th>レビュー平均評価</th>
+              <td><%= @member.reviews.average(:review_score).round(1) %></td>
+            </tr>
+            <tr>
+              <th>レビュー件数</th>
+              <td><%= @member.reviews.count %></td>
+            </tr>
+          </tbody>
+        </table>
+        <% end %>
+      </div>
+      
+    </div>
+    
+      <div class="col-6 m-1 border border-dark">
+        <h4>今までの発見</h4>
+        <% @discoveries.each do |discovery| %>
+        <table class="table table-borderless">
+          <tbody>
+            <tr>
+              <th>題名</th>
+              <td><%= link_to discovery.title, public_my_pages_show_path(discovery.id) %></td>
+            </tr>
+            <tr>
+              <th>説明</th>
+              <td><%= discovery.explanation %></td>
+            </tr>
+            <tr>
+              <th>画像１</th>
+              <td><%= image_tag discovery.get_image(300,300, discovery.image1) %></td>
+            </tr>
+            <tr>
+              <th>画像２</th>
+              <td><%= image_tag discovery.get_image(300,300, discovery.image2) %></td>
+            </tr>
+            <tr>
+              <th>ジャンル名</th>
+              <td><%= discovery.genre.genre_name  %></td>
+            </tr>
+          </tbody>
+        </table>  
+        <% end %>
+      </div>
+      
+  </div>
+</div>

@@ -1,41 +1,43 @@
 <b>会員詳細/編集</b>
 <%= form_with model: @member, url:  admin_member_path, method: :patch do |f| %>
 <table class="table">
- <tbody>
-  <tr>
-   <td>氏名</td>
-   <td><%= f.text_field :name %></td>
-  </tr>
-  <tr>
-   <td>ユーザー名</td>
-   <td><%= f.text_field :user_name %></td>
-  </tr>
-  <tr>
-   <td>メールアドレス</td>
-   <td><%= f.text_field :email %></td>
-  </tr>
-  <tr>
-   <td>発見件数</td>
-   <td></td>
-  </tr>
-　<tr>
-   <td>レビュー平均評価</td>
-   <td></td>
-  </tr>
-　<tr>
-   <td>レビュー件数</td>
-   <td></td>
-  </tr>
-  <tr>
-   <td>退会ステータス</td>
-   <td>
-  <%= f.radio_button :is_cancelled, :false %>
-  <%= f.label :is_cancelled, "登録" %>
-  <%= f.radio_button :is_cancelled, :true %>
-  <%= f.label :is_cancelled, "退会" %>
-  </td>
-  </tr>
- </tbody>
- </table>
-  <%= f.submit '変更を保存',class: "btn btn btn-success btn-sm"%>
-<% end %>
+  <tbody>
+    <tr>
+      <td>氏名</td>
+      <td><%= f.text_field :name %></td>
+    </tr>
+    <tr>
+      <td>ユーザー名</td>
+      <td><%= f.text_field :user_name %></td>
+    </tr>
+    <tr>
+      <td>メールアドレス</td>
+      <td><%= f.text_field :email %></td>
+    </tr>
+    <tr>
+      <td>発見件数</td>
+      <td><%= @member.discoveries.count %></td>
+    </tr>
+  　<tr>
+      <td>レビュー平均評価</td>
+      <td><%= @member.reviews.average(:review_score) %></td>
+    </tr>
+  　<tr>
+      <td>レビュー件数</td>
+      <td><%= @member.reviews.count %></td>
+    </tr>
+    <tr>
+      <td>退会ステータス</td>
+      <td>
+      <%= f.radio_button :is_cancelled, :false %>
+      <%= f.label :is_cancelled, "登録" %>
+      <%= f.radio_button :is_cancelled, :true %>
+      <%= f.label :is_cancelled, "退会" %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="text-center">
+  <%= f.submit '変更を保存'%>
+  <% end %>
+</div>
