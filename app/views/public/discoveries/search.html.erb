@@ -1,6 +1,6 @@
 <table class="table table-hover table-inverse">
-  <!--検索対象モデルがUserの時 -->
-  <% if @range == "Member" %>
+
+  <% if @range == "member" %>
     <tbody>
       <% @members.each do |member| %>
         <tr>
@@ -9,7 +9,7 @@
       <% end %>
     </tbody>
   <% else %>
-    <!--検索対象モデルがUserではない時(= 検索対象モデルがBookの時) -->
+
     <tbody>
   <% @discoveries.each do |discovery| %>
     <tr>

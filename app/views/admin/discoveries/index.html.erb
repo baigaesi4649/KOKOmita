@@ -1,35 +1,27 @@
 <b>発見一覧</b>
-<table class="table">
- <tbody>
-  <tr>
-  <th>発見ID</th>
-  <th>題名</th>
-  <th>説明</th>
-  <th>画像１</th>
-  <th>画像２</th>
-  <th>ジャンル名</th>
-  <th>レビュー平均評価</th>
-  <th>レビュー件数</th>
-  <th>発見ステータス</th>
-  </tr>
+<div class="container">
+  <div class="row">
   <% @discoveries.each do |discovery| %>
-  <tr>
-   <td><%= discovery.id %></td>
-   <td><%= link_to discovery.title, edit_admin_discovery_path(discovery.id) %></td>
-   <td><%= discovery.explanation %></td>
-   <td><%= image_tag discovery.get_image(300,300, discovery.image1) %></td>
-   <td><%= image_tag discovery.get_image(300,300, discovery.image2) %></td>
-   <td><%= discovery.genre.genre_name  %></td>
-   <td><%= discovery.reviews.average(:review_score) %></td>
-   <td><%= discovery.reviews.count %></td>
-   <td>
-     <% if discovery.is_deleted == true %>
-     削除済み
-     <% else %>
-     問題なし
-     <% end %>
-   </td>
-  </tr>
+  <div class="card col-12 col-md-4">
+    <div class="card-body">
+      <h5 class="card-title"><%= link_to discovery.title, edit_admin_discovery_path(discovery.id) %></h5>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">説明：<%= discovery.explanation %></li>
+      <li class="list-group-item">全体画像：<%= image_tag discovery.get_image(250,250, discovery.image1) %></li>
+      <li class="list-group-item">注目ポイント：<%= image_tag discovery.get_image(250,250, discovery.image2) %></li>
+      <li class="list-group-item">ジャンル名：<%= discovery.genre.genre_name %></li>
+      <li class="list-group-item">レビュー平均評価：<%= discovery.reviews.average(:review_score) %></li>
+      <li class="list-group-item">レビュー件数：<%= discovery.reviews.count %></li>
+      <li class="list-group-item">発見ステータス：
+      <% if discovery.is_deleted == true %>
+      削除済み
+      <% else %>
+      問題なし
+      <% end %>
+      </li>
+    </ul>
+  </div>
   <% end %>
- </tbody>
- </table>  
+  </div>
+</div>

@@ -11,37 +11,55 @@
    
     <div class="col-5 m-1">
         
-      <div class="border border-dark">
-        <h4>新しい発見</h4>
+      <!--<div class="border border-dark">-->
+      <!--  <h4>新しい発見</h4>-->
+      <!--  <%#= form_with model: @discovery, url: public_my_pages_path, method: :post do |f| %>-->
+      <!--  <table class="table table-borderless">-->
+      <!--    <tbody>-->
+      <!--      <tr>-->
+      <!--        <th>題名</th>-->
+      <!--        <td><%#= f.text_field :title %></td>-->
+      <!--      </tr>-->
+      <!--      <tr>-->
+      <!--        <th>説明</th>-->
+      <!--        <td><%#= f.text_area :explanation %></td>-->
+      <!--      </tr>-->
+      <!--      <tr>-->
+      <!--        <th>画像１</th>-->
+      <!--        <td><%#= f.file_field :image1, accept: "image/*" %></td>-->
+      <!--      </tr>-->
+      <!--      <tr>-->
+      <!--        <th>画像２</th>-->
+      <!--        <td><%#= f.file_field :image2, accept: "image/*" %></td>-->
+      <!--      </tr>-->
+      <!--      <tr>-->
+      <!--        <th>ジャンル名</th>-->
+      <!--        <td><%#= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :genre_name) %></td>-->
+      <!--      </tr>-->
+      <!--    </tbody> -->
+      <!--  </table>  -->
+      <!--<div class="text-center">  -->
+      <!--    <%#= f.submit '発見',class: "mb-3 p-3" %>-->
+      <!--  <%# end %>-->
+      <!--</div>-->
+      <!--</div>-->
+      
+      <h4>新しい発見</h4>
+      <div class="container">
+        <div class="row">
         <%= form_with model: @discovery, url: public_my_pages_path, method: :post do |f| %>
-        <table class="table table-borderless">
-          <tbody>
-            <tr>
-              <th>題名</th>
-              <td><%= f.text_field :title %></td>
-            </tr>
-            <tr>
-              <th>説明</th>
-              <td><%= f.text_area :explanation %></td>
-            </tr>
-            <tr>
-              <th>画像１</th>
-              <td><%= f.file_field :image1, accept: "image/*" %></td>
-            </tr>
-            <tr>
-              <th>画像２</th>
-              <td><%= f.file_field :image2, accept: "image/*" %></td>
-            </tr>
-            <tr>
-              <th>ジャンル名</th>
-              <td><%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :genre_name) %></td>
-            </tr>
-          </tbody> 
-        </table>  
-      <div class="text-center">  
-          <%= f.submit '発見',class: "mb-3 p-3" %>
+        <div class="card col">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">題名<%= f.text_field :title %></li>
+            <li class="list-group-item">説明<%= f.text_area :explanation %></li>
+            <li class="list-group-item">画像１<%= f.file_field :image1, accept: "image/*" %></li>
+            <li class="list-group-item">画像２<%= f.file_field :image2, accept: "image/*" %></li>
+            <li class="list-group-item">ジャンル名<%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :genre_name) %></li>
+            <li class="list-group-item"><%= f.submit '発見',class: "mb-3 p-3" %></li>
+          </ul>
+        </div>
         <% end %>
-      </div>
+        </div>
       </div>
 
       <div class=" mt-5 border border-dark">

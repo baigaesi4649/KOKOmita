@@ -1,26 +1,22 @@
-<table class="table">
- <tbody>
-  <tr>
-  <th>レビューID</th>
-  <th>ユーザー名</th>
-  <th>レビュー</th>
-  <th>コメント</th>
-  <th>レビューステータス</th>
-  </tr>
+<div class="container">
+  <div class="row">
   <% @reviews.each do |review| %>
-  <tr>
-   <td><%= review.id %></td>
-   <td><%= link_to review.member.user_name,  edit_admin_review_path(review.id) %></td>
-   <td><%= review.review_score %></td>
-   <td><%= review.comment %></td>
-   <td>
-     <% if review.is_cleared == true %>
-     削除済み
-     <% else %>
-     問題なし
-     <% end %>
-   </td>
-  </tr>
+  <div class="card col-12 col-md-4">
+    <div class="card-body">
+      <h5 class="card-title"><%= link_to review.member.user_name,  edit_admin_review_path(review.id) %></h5>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">レビュー：<%= review.review_score %></li>
+      <li class="list-group-item">コメント：<%= review.comment %></li>
+      <li class="list-group-item">レビューステータス：
+      <% if review.is_cleared == true %>
+      削除済み
+      <% else %>
+      問題なし
+      <% end %>
+      </li>
+    </ul>
+  </div>
   <% end %>
- </tbody>
- </table>  
+  </div>
+</div>

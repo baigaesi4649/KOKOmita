@@ -13,7 +13,7 @@ class Public::DiscoveriesController < ApplicationController
   def search
   @range = params[:range]
 
-  if @range == "Member"
+  if @range == "member"
     @members = Member.looks(params[:search], params[:word])
   else
     @discoveries = Discovery.looks(params[:search], params[:word])
