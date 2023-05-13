@@ -1,4 +1,5 @@
 class Admin::DiscoveriesController < ApplicationController
+before_action :authenticate_admin!
 
   def index
     @discoveries = Discovery.all

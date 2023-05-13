@@ -11,11 +11,7 @@ def self.looks(search, word)
   if search == "perfect_match"
     @member = Member.where("name LIKE ? OR user_name LIKE ? ", "#{word}", "#{word}")
   elsif search == "forward_match"
-    @member = Member.where("name LIKE ?","#{word}%")
-  elsif search == "backward_match"
-    @member = Member.where("name LIKE ?","%#{word}")
-  elsif search == "partial_match"
-    @member = Member.where("name LIKE ?","%#{word}%")
+    @member = Member.where("name LIKE ? OR user_name LIKE ? ", "#{word}%", "#{word}%")
   else
     @member = Member.all
   end

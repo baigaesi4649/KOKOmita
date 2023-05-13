@@ -22,6 +22,7 @@ class Public::MyPagesController < ApplicationController
   
   def show
     @discovery = Discovery.find(params[:id])
+    @reviews = @discovery.reviews.where(is_cleared: false)
   end
   
   def update

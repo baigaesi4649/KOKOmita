@@ -41,7 +41,7 @@ Rails.application.routes.draw do
      resources :members, only: [:index, :edit, :update]
      resources :discoveries, only: [:index, :edit, :update]
      resources :reviews, only: [:index, :edit, :update]
-     resources :genres, only: [:index, :create, :update]
+     resources :genres, only: [:index, :edit, :create, :update]
 
   end
   

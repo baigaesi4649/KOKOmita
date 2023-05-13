@@ -1,8 +1,8 @@
-<b>発見一覧</b>
+<h4 class="text-center mt-3">発見一覧</h4>
 <div class="container">
   <div class="row">
   <% @discoveries.each do |discovery| %>
-  <div class="card col-12 col-md-4">
+  <div class="card col-12 col-md-4 border-dark">
     <div class="card-body">
       <h5 class="card-title"><%= link_to discovery.title, edit_admin_discovery_path(discovery.id) %></h5>
     </div>

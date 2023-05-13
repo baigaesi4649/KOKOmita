@@ -1,13 +1,14 @@
 class Public::DiscoveriesController < ApplicationController
     
   def index
-   @discoveries = Discovery.all
+   @discoveries = Discovery.where(is_deleted: false)
   end
 
   def show
    @member = current_member
    @discovery = Discovery.find(params[:id])
    @review = Review.new
+   @reviews = @member.reviews.where(is_cleared: false)
   end
   
   def search

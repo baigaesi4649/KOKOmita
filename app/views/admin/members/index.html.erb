@@ -1,8 +1,8 @@
-<b>会員一覧</b>
+<h4 class="text-center mt-3">会員一覧</h4>
 <div class="container">
   <div class="row">
   <% @members.each do |member|%>
-  <div class="card col-12 col-md-4">
+  <div class="card col-12 col-md-4 border-dark">
     <div class="card-body">
       <h5 class="card-title"><%= link_to member.name, edit_admin_member_path(member.id) %>（<%= member.user_name %>）</h5>
     </div>

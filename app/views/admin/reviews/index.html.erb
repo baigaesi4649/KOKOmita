@@ -1,7 +1,8 @@
+<h4 class="text-center mt-3">レビュー・コメント一覧</h4>
 <div class="container">
   <div class="row">
   <% @reviews.each do |review| %>
-  <div class="card col-12 col-md-4">
+  <div class="card col-12 col-md-4 border-dark">
     <div class="card-body">
       <h5 class="card-title"><%= link_to review.member.user_name,  edit_admin_review_path(review.id) %></h5>
     </div>

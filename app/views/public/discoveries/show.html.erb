@@ -1,108 +1,62 @@
 <div class="container">
   <div class="row">
-   
-    <div class="col-5 m-1">
-      
-      <div class="border border-dark">
-        <h4>レビュー・コメント投稿</h4>
-        <%= form_with model: @review, url: public_reviews_path, method: :post do |f| %>
-        <table class="table table-borderless">
-          <tbody>
-            <tr>
-              <th>ユーザー名</th>
-              <td><%= current_member.user_name %></td>
-            </tr>
-            <tr>
-              <th>レビュー</th>
-              <td>
-                <div id="post_raty" ></div>
-                <script>
-                  var elem = document.getElementById('post_raty');
-                  var opt = {  
-                      starOn: "<%= asset_path('star-on.png') %>",
-                      starOff: "<%= asset_path('star-off.png') %>",
-                      starHalf: "<%= asset_path('star-half.png') %>",
-                      scoreName: "review[review_score]",
-                    };
-                    raty(elem,opt);
-                </script>
-              </td>
-            </tr>
-            <tr>
-              <th>コメント</th>
-              <td><%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %></td>
-            </tr>
-          </tbody> 
-        </table>  
-         <%= f.hidden_field :discovery_id, value: @discovery.id %>
-         <div class="text-center"><%= f.submit '発見',class: " mb-3 p-3" %></div>
-       <% end %>
-       </div>
-
-      <div class=" mt-5 border border-dark">
-        <h4>会員情報</h4>
-        <table class="table table-borderless">
-          <tbody>
-            <tr>
-              <th>ユーザー名</th>
-              <td><%= @discovery.member.user_name %></td>
-            </tr>
-            <tr>
-               <th>発見件数</th>
-               <td><%= @member.discoveries.count %></td>
-            </tr>
-            <tr>
-              <th>レビュー件数</th>
-              <td><%= @member.reviews.count %></td>
-            </tr>
-            <tr>
-              <th>レビュー平均評価</th>
-              <td><%= @member.reviews.average(:review_score) %></td>
-            </tr>
-            <tr>
-              <th>コメント一覧</th>
-            </tr>
-            <td>
-            <div class="row">
-              <% @discovery.reviews.each do |review|%>
-              <div class="col-4"><%= review.member.user_name%></div>
-              <div class="col-8 text-break"><%= review.comment%></div>
-              <%end%>
-            </div>
-            </td>
-          </tbody>
-        </table>
+    <div class="col-md-5 col-12 text-center">
+      <%= form_with model: @review, url: public_reviews_path, method: :post do |f| %>
+      <h4>レビュー・コメント投稿</h4>
+      <div class="card col border-dark">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">ユーザー名</br><%= current_member.user_name %></li>
+          <li class="list-group-item">
+            レビュー</br>
+              <div id="post_raty" ></div>
+              <script>
+                var elem = document.getElementById('post_raty');
+                var opt = {  
+                    starOn: "<%= asset_path('star-on.png') %>",
+                    starOff: "<%= asset_path('star-off.png') %>",
+                    starHalf: "<%= asset_path('star-half.png') %>",
+                    scoreName: "review[review_score]",
+                  };
+                  raty(elem,opt);
+              </script>
+            </li>
+          <li class="list-group-item">コメント</br><%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %></li>
+          <li class="list-group-item"><%= f.submit '発見',class: " mb-3 p-3" %></li>
+        </ul>
       </div>
-       
+      <%= f.hidden_field :discovery_id, value: @discovery.id %>
+      <% end %>
+
+      <h4>発見詳細</h4>
+      <div class="card col m-2 border-dark">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">題名</br><%= @discovery.title %></li>
+          <li class="list-group-item">説明</br><%= @discovery.explanation %></li>
+          <li class="list-group-item">全体画像</br><%= image_tag @discovery.get_image(300,300, @discovery.image1) %></li>
+          <li class="list-group-item">ココ見た</br><%= image_tag @discovery.get_image(300,300, @discovery.image2)%></li>
+          <li class="list-group-item">ジャンル名</br><%= @discovery.genre.genre_name %></li>
+        </ul>
+      </div>
     </div>
-  
-    <div class="col-6 m-1 border border-dark">
-        <h4>ピックアップ</h4>
-        <table class="table table-borderless">
-          <tbody>
-            <tr>
-              <th>題名</th>
-              <td><%= @discovery.title %></td>
-            </tr>
-            <tr>
-              <th>説明</th>
-              <td><%= @discovery.explanation %></td>
-            </tr>
-            <tr>
-              <th>画像１</th>
-              <td><%= image_tag @discovery.get_image(300,300, @discovery.image1) %></td>
-            </tr>
-            <tr>
-              <th>画像２(右上）</th>
-              <td><%= image_tag  @discovery.get_image(300,300, @discovery.image2)%></td>
-            </tr>
-            <tr>
-              <th>ジャンル名</th>
-              <td><%= @discovery.genre.genre_name %></td>
-            </tr>
-          </tbody>
-        </table>
-    </div>
-    
+
+    <div class="col-md-5 col-12 text-center">
+    <h4>会員情報</h4>
+      <div class="card col border-dark text-center">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">ユーザー名</br><%= @discovery.member.user_name %></li>
+          <li class="list-group-item">発見件数</br><%= @member.discoveries.count %></li>
+          <li class="list-group-item">レビュー件数</br><%= @member.reviews.count %></li>
+          <li class="list-group-item">レビュー平均評価</br><%= @member.reviews.average(:review_score) %></li>
+        コメント一覧</br>
+          <% @reviews.each do |review|%>
+        <ul class="border-dark mt-2 mb-2 mr-4">
+          <li class="list-group-item">ユーザー名</br><%= review.member.user_name %></li>
+          <li class="list-group-item">レビュー</br><%= review.review_score %></li>
+          <li class="list-group-item">コメント</br><%= review.comment %></li>
+        </ul>
+            <%end%>
+        </ul>
+      </div>
+    </div>  
   </div>
 </div>

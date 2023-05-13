@@ -1,0 +1,18 @@
+<h4 class="text-center mt-3">ジャンル詳細/編集</h4>
+<%= form_with model: @genre, url:  admin_genre_path, method: :patch do |f| %>
+<table class="table">
+ <tbody>
+  <tr>
+   <td>ジャンルID</td>
+   <td><%= @genre.id %></td>
+  </tr>
+  <tr>
+   <td>ジャンル名</td>
+   <td><%= f.text_area :genre_name %></td>
+  </tr>
+ </tbody>
+</table>
+<div class="text-center"> 
+  <%= f.submit '変更を保存'%>
+</div>
+<% end %>

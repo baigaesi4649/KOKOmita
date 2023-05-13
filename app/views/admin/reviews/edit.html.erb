@@ -1,3 +1,4 @@
+<h5 class="text-center mt-3">レビュー・コメント詳細/編集</h5>
 <%= form_with model: @review, url:  admin_review_path, method: :patch do |f| %>
 <table class="table">
  <tbody>
@@ -13,7 +14,7 @@
    <td>レビュー</td>
    <td><%= @review.review_score %></td>
   </tr>
-　<tr>
+  <tr>
    <td>コメント</td>
    <td><%= f.text_area :comment %></td>
   </tr>

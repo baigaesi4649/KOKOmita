@@ -10,13 +10,9 @@ class Discovery < ApplicationRecord
  
  def self.looks(search, word)
    if search == "perfect_match"
-     @discovery = Discovery.where("title LIKE?","#{word}")
+     @discovery = Discovery.joins(:genre).where("discoveries.title LIKE? OR genres.genre_name LIKE ? ","#{word}", "#{word}")
    elsif search == "forward_match"
-     @discovery = Discovery.where("title LIKE?","#{word}%")
-   elsif search == "backward_match"
-     @discovery = Discovery.where("title LIKE?","%#{word}")
-   elsif search == "partial_match"
-     @discovery = Discovery.where("title LIKE?","%#{word}%")
+     @discovery = Discovery.joins(:genre).where("discoveries.title LIKE? OR genres.genre_name LIKE ? ","#{word}%", "#{word}%")
    else
      @discovery = Discovery.all
    end
