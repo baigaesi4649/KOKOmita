@@ -1,14 +1,16 @@
 class Public::DiscoveriesController < ApplicationController
+before_action :authenticate_member!
     
   def index
    @discoveries = Discovery.where(is_deleted: false)
   end
 
   def show
-   @member = current_member
    @discovery = Discovery.find(params[:id])
+   @member = @discovery.member
    @review = Review.new
-   @reviews = @member.reviews.where(is_cleared: false)
+   discoveries = @member.discoveries.pluck(:id)
+   @reviews = Review.where(discovery_id: discoveries).where(is_cleared: false)
   end
   
   def search

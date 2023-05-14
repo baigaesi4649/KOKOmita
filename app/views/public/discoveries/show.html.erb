@@ -1,30 +1,32 @@
 <div class="container">
   <div class="row">
     <div class="col-md-5 col-12 text-center">
-      <%= form_with model: @review, url: public_reviews_path, method: :post do |f| %>
-      <h4>レビュー・コメント投稿</h4>
-      <div class="card col border-dark">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">ユーザー名</br><%= current_member.user_name %></li>
-          <li class="list-group-item">
-            レビュー</br>
-              <div id="post_raty" ></div>
-              <script>
-                var elem = document.getElementById('post_raty');
-                var opt = {  
-                    starOn: "<%= asset_path('star-on.png') %>",
-                    starOff: "<%= asset_path('star-off.png') %>",
-                    starHalf: "<%= asset_path('star-half.png') %>",
-                    scoreName: "review[review_score]",
-                  };
-                  raty(elem,opt);
-              </script>
-            </li>
-          <li class="list-group-item">コメント</br><%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %></li>
-          <li class="list-group-item"><%= f.submit '発見',class: " mb-3 p-3" %></li>
-        </ul>
-      </div>
-      <%= f.hidden_field :discovery_id, value: @discovery.id %>
+      <% if @discovery.member_id != current_member.id %>
+        <%= form_with model: @review, url: public_reviews_path, method: :post do |f| %>
+        <h4>レビュー・コメント投稿</h4>
+        <div class="card col border-dark">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">ユーザー名</br><%= current_member.user_name %></li>
+            <li class="list-group-item">
+              レビュー</br>
+                <div id="post_raty" ></div>
+                <script>
+                  var elem = document.getElementById('post_raty');
+                  var opt = {  
+                      starOn: "<%= asset_path('star-on.png') %>",
+                      starOff: "<%= asset_path('star-off.png') %>",
+                      starHalf: "<%= asset_path('star-half.png') %>",
+                      scoreName: "review[review_score]",
+                    };
+                    raty(elem,opt);
+                </script>
+              </li>
+            <li class="list-group-item">コメント</br><%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %></li>
+            <li class="list-group-item"><%= f.submit '投稿',class: " mb-3 p-3" %></li>
+          </ul>
+        </div>
+        <%= f.hidden_field :discovery_id, value: @discovery.id %>
+        <% end %>
       <% end %>
 
       <h4>発見詳細</h4>
@@ -40,13 +42,19 @@
     </div>
 
     <div class="col-md-5 col-12 text-center">
-    <h4>会員情報</h4>
+    <h4>レビュー情報</h4>
       <div class="card col border-dark text-center">
         <ul class="list-group list-group-flush">
           <li class="list-group-item">ユーザー名</br><%= @discovery.member.user_name %></li>
           <li class="list-group-item">発見件数</br><%= @member.discoveries.count %></li>
-          <li class="list-group-item">レビュー件数</br><%= @member.reviews.count %></li>
-          <li class="list-group-item">レビュー平均評価</br><%= @member.reviews.average(:review_score) %></li>
+          <li class="list-group-item">レビュー件数</br><%= @reviews.count %></li>
+          <li class="list-group-item">レビュー平均評価</br>
+          <% if @reviews.any? %>
+          <%= @reviews.average(:review_score).round(1) %>
+          <% else %>
+          <p>--</p>
+          <% end %>
+          </li>
         コメント一覧</br>
           <% @reviews.each do |review|%>
         <ul class="border-dark mt-2 mb-2 mr-4">

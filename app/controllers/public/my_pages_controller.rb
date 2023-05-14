@@ -1,5 +1,6 @@
 class Public::MyPagesController < ApplicationController
-    
+before_action :authenticate_member!
+
   def index
     @member = current_member
     @discovery = Discovery.new
