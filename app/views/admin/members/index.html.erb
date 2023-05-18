@@ -4,15 +4,23 @@
   <% @members.each do |member|%>
   <div class="card col-12 col-md-4 border-dark">
     <div class="card-body">
-      <h5 class="card-title"><%= link_to member.name, edit_admin_member_path(member.id) %>（<%= member.user_name %>）</h5>
+      <h5 class="card-title">
+      <%= link_to edit_admin_member_path(member.id) do %>
+      <%=  member.name.present?? member.name : "ななし" %>
+      (<%=  member.user_name.present?? member.user_name : "ナナシ" %>)
+        <%# if member.user_name.present? %>
+        <%#=  member.user_name %>
+        <%# end %>
+      <% end %>
+      </h5>
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">発見件数：<%= member.discoveries.count %></li>
-      <li class="list-group-item">レビュー平均評価：<%= member.reviews.average(:review_score) %></li>
+      <li class="list-group-item">レビュー平均評価：<%= member.reviews.average(:review_score).round(1) %></li>
       <li class="list-group-item">レビュー件数：<%= member.reviews.count %></li>
       <li class="list-group-item">退会ステータス：
       <% if member.is_cancelled == true %>
-      削除済み
+      退会済み
       <% else %>
       問題なし
       <% end %>

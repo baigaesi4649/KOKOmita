@@ -12,12 +12,12 @@
           <li class="list-group-item">ジャンル名</br><%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :genre_name) %></li>
           <li class="list-group-item">
             <%= f.submit '更新',class: "button mr-3"%>
-            <%= link_to "削除",  public_my_pages_delete_path(current_member.id),method: :delete,class: "btn btn-light" %>
+            <%= link_to "削除",  public_my_pages_delete_path(@discovery.id),method: :delete,class: "btn btn-light" %>
           </li>
         </ul>
       </div>
       <% end %>
-      
+
       <h4>発見詳細</h4>
       <div class="card col border-dark">
         <ul class="list-group list-group-flush">
@@ -41,6 +41,6 @@
         </ul>
       </div>
       <% end %>
-    </div>  
+    </div>
   </div>
 </div>

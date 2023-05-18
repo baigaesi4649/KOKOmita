@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-5 col-12 text-center">
       <% if @discovery.member_id != current_member.id %>
-        <%= form_with model: @review, url: public_reviews_path, method: :post do |f| %>
+        <%= form_with model: Review.new, url: public_reviews_path, method: :post do |f| %>
         <h4>レビュー・コメント投稿</h4>
         <div class="card col border-dark">
           <ul class="list-group list-group-flush">

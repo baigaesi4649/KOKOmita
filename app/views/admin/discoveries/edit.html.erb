@@ -15,14 +15,14 @@
       <td><%= f.text_area :explanation %></td>
     </tr>
     <tr>
-      <td>画像１</td>
+      <td>全体画像</td>
       <td>
       <%= f.file_field :image1, accept: "image/*" %></br>
       <%= image_tag @discovery.get_image(300,300, @discovery.image1),id: "preview",size: "300x300" %>
       </td>
     </tr>
     <tr>
-      <td>画像２</td>
+      <td>ココ見た</td>
       <td>
       <%= f.file_field :image2, accept: "image/*" %></br>
       <%= image_tag @discovery.get_image(300,300, @discovery.image2),id: "preview2",size: "300x300" %>
@@ -51,8 +51,8 @@
     </tr>
   </tbody>
 </table>
-<div class="text-center"> 
-  <%= f.submit '変更を保存' %>
+<div class="text-center">
+  <%= f.submit '更新' %>
 <% end %>
 </div>
 

@@ -4,9 +4,9 @@ before_action :authenticate_member!
   def index
     @member = current_member
     @discovery = Discovery.new
-    @discoveries = current_member.discoveries
+    @discoveries = current_member.discoveries.where(is_deleted: false)
   end
-  
+
   def create
     @discovery = Discovery.new(discoveries_params)
     @discovery.member_id = current_member.id
@@ -20,12 +20,12 @@ before_action :authenticate_member!
      render :index
    end
   end
-  
+
   def show
     @discovery = Discovery.find(params[:id])
     @reviews = @discovery.reviews.where(is_cleared: false)
   end
-  
+
   def update
    @member = current_member
    if @member.update(members_params)
@@ -33,15 +33,15 @@ before_action :authenticate_member!
    redirect_to  public_my_pages_path
    end
   end
-  
-  
+
+
   def withdraw
    @member = current_member
    @member.update(is_cancelled: true)
    reset_session
    redirect_to root_path
-  end  
-  
+  end
+
   def renew
    @discovery = Discovery.find(params[:id])
    if @discovery.update(discoveries_params)
@@ -49,13 +49,13 @@ before_action :authenticate_member!
    redirect_to  public_my_pages_path
    end
   end
-  
+
   def destroy
     discovery = Discovery.find(params[:id])
     discovery.destroy
     redirect_to public_my_pages_path
   end
-  
+
   private
   def members_params
    params.require(:member).permit(:name, :user_name, :email)
