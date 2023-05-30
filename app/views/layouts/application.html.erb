@@ -74,6 +74,7 @@
           </div>
         </div>
       </nav>
+      <% if member_signed_in? %>
       <nav class="navbar navbar-light bg-light">
        <div class="container-fluid">
           <div class="search_form">
@@ -86,6 +87,7 @@
           </div>
        </div>
       </nav>
+      <% end %>
     </header>
     <%= yield %>
   </body>

@@ -16,8 +16,10 @@
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">発見件数：<%= member.discoveries.count %></li>
-      <li class="list-group-item">レビュー平均評価：<%= member.reviews.present? ? member.reviews.average(:review_score).round(1) : "0" %></li>
+      <li class="list-group-item">レビュー平均評価：<%= member.reviews.present? ? member.reviews.average(:review_score).round(1) : "--" %></li>
       <li class="list-group-item">レビュー件数：<%= member.reviews.count %></li>
+      <li class="list-group-item">レビューされた平均評価：<%= member.revieweds.present? ? member.revieweds.average(:review_score).round(1) : "--" %></li>
+      <li class="list-group-item">レビューされた件数：<%= member.revieweds.count %></li>
       <li class="list-group-item">退会ステータス：
       <% if member.is_cancelled == true %>
       退会済み

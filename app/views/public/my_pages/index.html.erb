@@ -36,14 +36,14 @@
           <%= link_to "退会", public_my_pages_withdraw_path,method: :patch,data: {confirm: "削除しますか？"},class: "btn btn-light" %>
           <% end %>            
           <li class="list-group-item">発見件数</br><%= @member.discoveries.count %></li>
-          <li class="list-group-item">レビュー平均評価</br>
-          <% if @member.reviews.any? %>
-          <%= @member.reviews.average(:review_score).round(1) %>
+          <li class="list-group-item">レビューされた平均評価</br>
+          <% if @member.revieweds.any? %>
+          <%= @member.revieweds.average(:review_score).round(1) %>
           <% else %>
           <p>--</p>
           <% end %>
           </li>
-          <li class="list-group-item">レビュー件数</br><%= @member.reviews.count %></li>
+          <li class="list-group-item">レビューされた件数</br><%= @member.revieweds.count %></li>
         </ul>
       </div>
       <% end %>

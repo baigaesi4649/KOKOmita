@@ -20,11 +20,19 @@
     </tr>
   　<tr>
       <td>レビュー平均評価</td>
-      <td><%= @member.reviews.average(:review_score) %></td>
+      <td><%= @member.reviews.present? ? @member.reviews.average(:review_score).round(1) : "--" %></td>
     </tr>
   　<tr>
       <td>レビュー件数</td>
       <td><%= @member.reviews.count %></td>
+    </tr>
+  　<tr>
+      <td>レビューされた平均評価</td>
+      <td><%= @member.revieweds.present? ? @member.revieweds.average(:review_score).round(1) : "--" %></td>
+    </tr>
+  　<tr>
+      <td>レビューされた件数</td>
+      <td><%= @member.revieweds.count %></td>
     </tr>
     <tr>
       <td>退会ステータス</td>

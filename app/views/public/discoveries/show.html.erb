@@ -48,7 +48,7 @@
           <li class="list-group-item">ユーザー名</br><%= @discovery.member.user_name %></li>
           <li class="list-group-item">発見件数</br><%= @member.discoveries.count %></li>
           <li class="list-group-item">レビュー件数</br><%= @reviews.count %></li>
-          <li class="list-group-item">レビュー平均評価</br>
+          <li class="list-group-item">レビュー平均</br>
           <% if @reviews.any? %>
           <%= @reviews.average(:review_score).round(1) %>
           <% else %>
