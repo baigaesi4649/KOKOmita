@@ -11,7 +11,13 @@
       <li class="list-group-item">全体画像</br><%= image_tag discovery.get_image(250,250, discovery.image1) %></li>
       <li class="list-group-item">ココ見た</br><%= image_tag discovery.get_image(250,250, discovery.image2) %></li>
       <li class="list-group-item">ジャンル名</br><%= discovery.genre.genre_name %></li>
-      <li class="list-group-item">レビュー平均評価</br><%= discovery.reviews.average(:review_score).round(1) %></li>
+      <li class="list-group-item">レビュー平均評価</br>
+      <% if discovery.reviews.any? %>
+      <%= discovery.reviews.average(:review_score).round(1) %>
+      <% else %>
+      <p>--</p>
+      <% end %>
+      </li>
       <li class="list-group-item">レビュー件数</br><%= discovery.reviews.count %></li>
       <li class="list-group-item">発見ステータス</br>
       <% if discovery.is_deleted == true %>
